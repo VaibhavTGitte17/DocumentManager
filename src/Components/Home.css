@@ -1,0 +1,25 @@
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin: 20px;
+  }
+  
+  .card-container .MuiCard-root {
+    margin: 10px;
+  }
+  
+  .card-media {
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .card-media:hover {
+    transform: translateY(-10px);
+  }
+  
+  .card-container .MuiCard-root:hover .MuiTypography-gutterBottom {
+    text-decoration: underline;
+    color: crimson;
+  }
+
+  

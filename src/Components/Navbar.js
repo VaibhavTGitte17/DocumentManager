@@ -1,3 +1,4 @@
+import './Navbar.css';
 import * as React from 'react';
 import { NavLink } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
@@ -15,11 +16,13 @@ import AdbIcon from '@mui/icons-material/Adb';
 const pages = [
   { name: 'Home', path: '/' },
   { name: 'Create Folder', path: '/create' },
-  { name: 'Upload', path: '/upload' }
+  { name: 'Upload', path: '/upload' },
+  { name: 'Configuration', path: '/configure' }
 ];
 
 function Navbar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [menuOpen, setMenuOpen] = React.useState(false);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -27,12 +30,17 @@ function Navbar() {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+    setMenuOpen(false);
+  };
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen);
   };
 
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
+        <Toolbar disableGutters className="navbar-container">
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
@@ -51,49 +59,20 @@ function Navbar() {
             Navbar
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
               aria-label="account of current user"
               aria-controls="menu-appbar"
               aria-haspopup="true"
-              onClick={handleOpenNavMenu}
+              onClick={toggleMenu}
               color="inherit"
+              className="menu-button"
             >
               <MenuIcon />
             </IconButton>
-            <Menu
-              id="menu-appbar"
-              anchorEl={anchorElNav}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'left',
-              }}
-              open={Boolean(anchorElNav)}
-              onClose={handleCloseNavMenu}
-              sx={{
-                display: { xs: 'block', md: 'none' },
-              }}
-            >
-              {pages.map((page) => (
-                <MenuItem key={page.name} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">
-                    <NavLink
-                      to={page.path}
-                      style={{ textDecoration: 'none', color: 'inherit' }}
-                    >
-                      {page.name}
-                    </NavLink>
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
+
           <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
           <Typography
             variant="h5"
@@ -106,31 +85,50 @@ function Navbar() {
               flexGrow: 1,
               fontFamily: 'monospace',
               fontWeight: 700,
-              letterSpacing: '.3rem',
               color: 'inherit',
               textDecoration: 'none',
             }}
           >
             Navbar
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }} className="navbar-links">
             {pages.map((page) => (
               <Button
                 key={page.name}
                 component={NavLink}
                 to={page.path}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: 'white', display: 'block' }}
+                sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
                 style={{ textDecoration: 'none' }}
+                className="navbar-link"
               >
                 {page.name}
               </Button>
             ))}
           </Box>
+
+          {/* Menu for small screens */}
+          {menuOpen && (
+            <Box className="navbar-links show">
+              {pages.map((page) => (
+                <Button
+                  key={page.name}
+                  component={NavLink}
+                  to={page.path}
+                  onClick={handleCloseNavMenu}
+                  sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
+                  style={{ textDecoration: 'none' }}
+                  className="navbar-link"
+                >
+                  {page.name}
+                </Button>
+              ))}
+            </Box>
+          )}
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
-
 export default Navbar;

@@ -1,0 +1,47 @@
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+  }
+  
+  /* Style for the navbar links */
+  .navbar-link {
+    text-decoration: none;
+    color: white;
+    margin-right: 15px;
+  }
+  
+  /* Hide the menu button on larger screens */
+  .menu-button {
+    display: none;
+  }
+  
+  /* Media query for screens smaller than 600px */
+  @media (max-width: 600px) {
+    .navbar-container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .navbar-links {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .navbar-link {
+      margin: 10px 0;
+    }
+  
+    .menu-button {
+      display: block;
+    }
+  
+    
+    .navbar-links.show {
+      display: flex;
+    }
+  }
+  

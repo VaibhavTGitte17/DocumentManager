@@ -5,11 +5,13 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import { Box, Typography } from "@mui/material";
 
+
+
 const Footer = () => {
   return (
     <>
       <Box
-        sx={{ textAlign: "center", bgcolor: "white", color: "blue", p: 3  }}
+        sx={{ textAlign: "center", bgcolor: "white", color: "blue", p: 3 , my:40}}
       >
         <Box
           sx={{
